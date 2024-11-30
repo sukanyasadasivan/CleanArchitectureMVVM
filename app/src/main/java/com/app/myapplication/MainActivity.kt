@@ -1,6 +1,7 @@
 package com.app.myapplication
 
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.toolbarTitle.setOnClickListener {  }
 
 //        setContentView(R.layout.activity_main)
 //        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
