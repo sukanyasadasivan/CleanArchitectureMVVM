@@ -13,12 +13,28 @@
         <action
             android:id="@+id/action_landingFragment_to_drConsultationFragment"
             app:destination="@id/drConsultationFragment" />
+        <action
+            android:id="@+id/action_landingFragment_to_healthPackagesFragment"
+            app:destination="@id/healthPackagesFragment" />
+        <action
+            android:id="@+id/action_landingFragment_to_diagnosticsFragment"
+            app:destination="@id/diagnosticsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/drConsultationFragment"
         android:name="com.app.myapplication.features.drconsultation.presentation.DrConsultationFragment"
         android:label="DrConsultationFragment"
-        tools:layout="@layout/fragment_drconsultation"/>
+        tools:layout="@layout/fragment_drconsultation" />
+    <fragment
+        android:id="@+id/healthPackagesFragment"
+        android:name="com.app.myapplication.features.healthpackage.presentation.HealthPackagesFragment"
+        android:label="HealthPackagesFragment"
+        tools:layout="@layout/fragment_healthpackages" />
+    <fragment
+        android:id="@+id/diagnosticsFragment"
+        android:name="com.app.myapplication.features.diagnostics.presentation.DiagnosticsFragment"
+        android:label="DiagnosticsFragment"
+        tools:layout="@layout/fragment_healthpackages"/>
 
 </navigation>

@@ -5,4 +5,6 @@
     <string name="doctor_consultation">Doctor Consultation</string>
     <string name="diagnostics">Diagnostics</string>
     <string name="health_packages">Health Packages</string>
+    <string name="price">Price: $ %1$f</string>
+
 </resources>

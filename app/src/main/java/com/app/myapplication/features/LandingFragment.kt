@@ -32,10 +32,24 @@ class LandingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.cardViewDr.setOnClickListener {
-            val action = LandingFragmentDirections.actionLandingFragmentToDrConsultationFragment()
-            view.findNavController().navigate(action)
+        binding.apply {
+            cardViewDr.setOnClickListener {
+                val action =
+                    LandingFragmentDirections.actionLandingFragmentToDrConsultationFragment()
+                view.findNavController().navigate(action)
+            }
+            cardViewHealth.setOnClickListener {
+                val action =
+                    LandingFragmentDirections.actionLandingFragmentToHealthPackagesFragment()
+                view.findNavController().navigate(action)
+            }
+            cardViewDiagnostics.setOnClickListener {
+                val action =
+                    LandingFragmentDirections.actionLandingFragmentToDiagnosticsFragment()
+                view.findNavController().navigate(action)
+            }
         }
+
 
     }
 
