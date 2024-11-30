@@ -12,7 +12,7 @@
             android:id="@+id/doctorNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Doctor Name"
+            tools:text="Doctor Name"
             android:textColor="#000"
             android:textSize="14sp" />
 
@@ -20,7 +20,7 @@
             android:id="@+id/doctorDetailsTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Doctor Details"
+            tools:text="Doctor Details"
             android:textColor="#666"
             android:textSize="12sp" />
     </LinearLayout>

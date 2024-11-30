@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.app.myapplication.R
 import com.app.myapplication.databinding.FragmentLandingBinding
 
@@ -26,6 +27,16 @@ class LandingFragment : Fragment() {
 
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.cardViewDr.setOnClickListener {
+            val action = LandingFragmentDirections.actionLandingFragmentToDrConsultationFragment()
+            view.findNavController().navigate(action)
+        }
+
     }
 
 }

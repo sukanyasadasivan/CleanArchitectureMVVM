@@ -9,6 +9,16 @@
         android:id="@+id/landingFragment"
         android:name="com.app.myapplication.features.LandingFragment"
         android:label="LandingFragment"
-        tools:layout="@layout/fragment_landing"/>
+        tools:layout="@layout/fragment_landing">
+        <action
+            android:id="@+id/action_landingFragment_to_drConsultationFragment"
+            app:destination="@id/drConsultationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/drConsultationFragment"
+        android:name="com.app.myapplication.features.drconsultation.presentation.DrConsultationFragment"
+        android:label="DrConsultationFragment"
+        tools:layout="@layout/fragment_drconsultation"/>
 
 </navigation>
