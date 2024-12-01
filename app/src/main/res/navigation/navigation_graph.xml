@@ -5,6 +5,10 @@
     android:id="@+id/navigation_graph"
     app:startDestination="@id/landingFragment">
 
+    <action
+        android:id="@+id/openAppointments"
+        app:destination="@+id/appointmentFragment" />
+
     <fragment
         android:id="@+id/landingFragment"
         android:name="com.app.myapplication.features.LandingFragment"
@@ -35,6 +39,11 @@
         android:id="@+id/diagnosticsFragment"
         android:name="com.app.myapplication.features.diagnostics.presentation.DiagnosticsFragment"
         android:label="DiagnosticsFragment"
-        tools:layout="@layout/fragment_healthpackages"/>
+        tools:layout="@layout/fragment_healthpackages" />
+    <fragment
+        android:id="@+id/appointmentFragment"
+        android:name="com.app.myapplication.features.appointment.presentation.AppointmentFragment"
+        android:label="AppointmentFragment"
+        tools:layout="@layout/fragment_appointment" />
 
 </navigation>

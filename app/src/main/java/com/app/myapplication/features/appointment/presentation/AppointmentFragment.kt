@@ -1,10 +1,9 @@
-package com.app.myapplication.features.drconsultation.presentation
+package com.app.myapplication.features.appointment.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,17 +11,19 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.app.myapplication.R
-import com.app.myapplication.databinding.FragmentDrconsultationBinding
-import com.app.myapplication.features.appointment.data.Appointment
+import com.app.myapplication.databinding.FragmentAppointmentBinding
+import com.app.myapplication.databinding.FragmentHealthpackagesBinding
+import com.app.myapplication.features.diagnostics.presentation.DiagnosticsViewModel
+import com.app.myapplication.features.healthpackage.presentation.MedicalServiceAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class DrConsultationFragment : Fragment(), ClickListener {
+class AppointmentFragment : Fragment() {
 
-    private lateinit var binding: FragmentDrconsultationBinding
-    private val viewModel: DrConsultationViewModel by viewModels()
+    private lateinit var binding: FragmentAppointmentBinding
+    private val viewModel: AppointmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +31,7 @@ class DrConsultationFragment : Fragment(), ClickListener {
     ): View {
 
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_drconsultation,
+            inflater, R.layout.fragment_appointment,
             container, false
         )
 
@@ -45,27 +46,24 @@ class DrConsultationFragment : Fragment(), ClickListener {
     }
 
     private fun observeData() {
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collectLatest { uiState ->
                     when (uiState) {
-                        DrConsultationViewModel.UiState.Loading -> viewModel.loadSpecialty()
-                        is DrConsultationViewModel.UiState.Loaded -> {
-                            binding.expandableRecyclerView.adapter =
-                                SpecialtyExpandableAdaptor(
-                                    uiState.specialtyList,
-                                    this@DrConsultationFragment
-                                )
+                        AppointmentViewModel.UiState.Loading -> viewModel.loadAppointmentList()
+                        is AppointmentViewModel.UiState.Loaded -> {
+                            binding.totalPrice.text = requireContext().resources.getString(
+                                R.string.total_price,
+                                viewModel.totalPrice.value
+                            )
+                            binding.recyclerView.adapter =
+                                AppointmentAdaptor(requireContext(), uiState.appointmentList)
                         }
                     }
                 }
             }
         }
-    }
-
-    override fun appointmentClick(appointment: Appointment) {
-        viewModel.saveAppointment(appointment)
-        Toast.makeText(requireContext(), "Appointment saved", Toast.LENGTH_LONG).show()
     }
 
 }

@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.androidx.navigation.safeargs)
+    alias(libs.plugins.hilt.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -49,6 +51,12 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+//    implementation(libs.androidx.room.compiler) //kapt
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

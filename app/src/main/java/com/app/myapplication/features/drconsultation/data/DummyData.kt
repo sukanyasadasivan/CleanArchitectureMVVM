@@ -5,7 +5,7 @@ fun generateSpecialtyData(): List<Specialty> =
         Specialty(
             id = "1",
             name = "General Physician",
-            price = "$50 - $100",
+            price = 50f,
             doctors = listOf(
                 Doctor(id = "1", name = "Dr. Smith", details = "10 years experience, MBBS"),
                 Doctor(
@@ -18,7 +18,7 @@ fun generateSpecialtyData(): List<Specialty> =
         Specialty(
             id = "2",
             name = "Cardiologist",
-            price = "$150 - $300",
+            price = 150f,
             doctors = listOf(
                 Doctor(
                     id = "3",
@@ -35,7 +35,7 @@ fun generateSpecialtyData(): List<Specialty> =
         Specialty(
             id = "3",
             name = "Dermatologist",
-            price = "$80 - $150",
+            price = 90f,
             doctors = listOf(
                 Doctor(
                     id = "5",
@@ -52,7 +52,7 @@ fun generateSpecialtyData(): List<Specialty> =
         Specialty(
             id = "4",
             name = "Orthopedic",
-            price = "$120 - $250",
+            price = 130f,
             doctors = listOf(
                 Doctor(
                     id = "7",

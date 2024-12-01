@@ -5,32 +5,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
         android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/doctorNameTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:textSize="14sp"
-            tools:text="Doctor Name" />
-
-        <TextView
-            android:id="@+id/doctorDetailsTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#666"
-            android:textSize="12sp"
-            tools:text="Doctor Details" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAppointment"
+            android:id="@+id/specialtyTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/book_appointment" />
+            tools:text="Specialty"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/drTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Doctor"
+            android:textColor="#666"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Price: $0.0"
+            android:textColor="#666"
+            android:textSize="14sp" />
     </LinearLayout>
-
 </layout>

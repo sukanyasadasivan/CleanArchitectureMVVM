@@ -1,10 +1,11 @@
-package com.app.myapplication.features.drconsultation.presentation
+package com.app.myapplication.features.appointment.presentation
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.myapplication.features.appointment.data.Appointment
-import com.app.myapplication.features.drconsultation.data.Specialty
-import com.app.myapplication.features.drconsultation.domain.LoadDrConsultationData
+import com.app.myapplication.features.appointment.domain.usecases.LoadAppointments
 import com.app.myapplication.features.drconsultation.domain.SaveAppointment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,12 +14,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DrConsultationViewModel @Inject constructor(private val saveAppointment: SaveAppointment) :
-    ViewModel() {
+class AppointmentViewModel @Inject constructor(
+    private val saveAppointment: SaveAppointment,
+    private val loadAppointments: LoadAppointments
+) : ViewModel() {
 
     sealed class UiState {
         data object Loading : UiState()
-        data class Loaded(val specialtyList: List<Specialty>) : UiState()
+        data class Loaded(val appointmentList: List<Appointment>) : UiState()
     }
 
     // Backing property to avoid state updates from other classes
@@ -27,18 +30,15 @@ class DrConsultationViewModel @Inject constructor(private val saveAppointment: S
     // The UI collects from this StateFlow to get its state updates
     val uiState: StateFlow<UiState> = _uiState
 
-
-    fun loadSpecialty() {
-        // ideally the use-case should be injected in the constructor. Avoided di as there are only dummy data
-        _uiState.value =
-            UiState.Loaded(LoadDrConsultationData().loadConsultationData())
-
-    }
+    private val _totalPrice: MutableLiveData<Double> = MutableLiveData(0.0)
+    val totalPrice: LiveData<Double> = _totalPrice
 
 
-    fun saveAppointment(appointment: Appointment) {
+    fun loadAppointmentList() {
         viewModelScope.launch {
-            saveAppointment.saveAppointment(appointment)
+            val appointments = loadAppointments.loadAppointments()
+            _totalPrice.value = appointments.sumOf { it.price.toDouble() }
+            _uiState.value = UiState.Loaded(appointments)
         }
     }
 

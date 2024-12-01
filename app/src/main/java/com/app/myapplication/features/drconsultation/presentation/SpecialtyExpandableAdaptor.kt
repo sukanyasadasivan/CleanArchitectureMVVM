@@ -3,15 +3,18 @@ package com.app.myapplication.features.drconsultation.presentation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.myapplication.R
+import com.app.myapplication.features.appointment.data.Appointment
 import com.app.myapplication.features.drconsultation.data.Doctor
 import com.app.myapplication.features.drconsultation.data.Specialty
 
 class SpecialtyExpandableAdaptor(
-    private val specialtyList: List<Specialty>
+    private val specialtyList: List<Specialty>,
+    private val clickListener: ClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val expandedPositions = mutableSetOf<Int>()
@@ -60,7 +63,10 @@ class SpecialtyExpandableAdaptor(
             if (expandedPositions.contains(index)) {
                 val childIndex = position - cumulativeIndex - 1
                 if (childIndex < specialization.doctors.size) {
-                    (holder as ChildViewHolder).bind(specialization.doctors[childIndex])
+                    (holder as ChildViewHolder).bind(
+                        specialization.doctors[childIndex],
+                        specialization
+                    )
                     return
                 }
             }
@@ -73,7 +79,7 @@ class SpecialtyExpandableAdaptor(
         private val arrowImageView: ImageView = itemView.findViewById(R.id.arrowImageView)
 
         fun bind(specialization: Specialty, index: Int) {
-            titleTextView.text = specialization.name
+            titleTextView.text = "${specialization.name} ( $ ${specialization.price} )"
             arrowImageView.rotation = if (expandedPositions.contains(index)) 180f else 0f
 
             itemView.setOnClickListener {
@@ -87,14 +93,30 @@ class SpecialtyExpandableAdaptor(
         }
     }
 
-    inner class ChildViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ChildViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
         private val doctorNameTextView: TextView = itemView.findViewById(R.id.doctorNameTextView)
         private val doctorDetailsTextView: TextView =
             itemView.findViewById(R.id.doctorDetailsTextView)
+        private val bookAppointment: Button = itemView.findViewById(R.id.btnAppointment)
 
-        fun bind(doctor: Doctor) {
+        fun bind(doctor: Doctor, specialization: Specialty) {
             doctorNameTextView.text = doctor.name
             doctorDetailsTextView.text = doctor.details
+            bookAppointment.setOnClickListener {
+                clickListener.appointmentClick(
+                    Appointment(
+                        Doctor(doctor.id, doctor.name, doctor.details),
+                        specialization.id,
+                        specialization.name,
+                        specialization.price
+                    )
+                )
+            }
         }
     }
+}
+
+interface ClickListener {
+    fun appointmentClick(appointment: Appointment)
 }
