@@ -12,9 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.app.myapplication.R
 import com.app.myapplication.databinding.FragmentAppointmentBinding
-import com.app.myapplication.databinding.FragmentHealthpackagesBinding
-import com.app.myapplication.features.diagnostics.presentation.DiagnosticsViewModel
-import com.app.myapplication.features.healthpackage.presentation.MedicalServiceAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
