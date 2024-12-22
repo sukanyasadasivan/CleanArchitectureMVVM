@@ -1,4 +1,4 @@
-A very small projects that includes following
+A very small project that includes following
 1. MVVM with clean architecture
 2. Kotlin only
 3. Retrofit, hilt and room
